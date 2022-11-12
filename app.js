@@ -9,12 +9,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const hcList = document.getElementById("hclist");
   const searchButton = document.getElementById("search-button");
   const searchInput = document.getElementById("search-input");
+  const sorterAlf = document.getElementById("filter-alfabetico");
+  const sorterPrice = document.getElementById("filter-precio");
+  const sorterDesc = document.getElementById("filter-descuento");
+  const fragment = document.createDocumentFragment();
   
   let dropdown = document.getElementById("category");
   dropdown.length = 0;
   
   let defaultOption = document.createElement("option");
-  defaultOption.text = "Categoria";
+  defaultOption.text = "Todos";
   defaultOption.value = "All";
   
   dropdown.add(defaultOption);
@@ -24,13 +28,19 @@ document.addEventListener("DOMContentLoaded", (e) => {
     search();
   });
   
-  searchInput.addEventListener("input", (e) => {
-    search();
-  });
+  searchInput.addEventListener("keypress", function(event) {
   
-  searchInput.onkeyup = function () {
-    search();
-  };
+    if (event.key === "Enter") {
+        search();
+    }
+  });
+  searchInput.addEventListener("input", (e) => {
+    console.log(searchInput.value);
+    if(searchInput.value == ""){
+        fetchData();
+    }
+  });
+
   
   dropdown.addEventListener(
     "input",
@@ -39,7 +49,22 @@ document.addEventListener("DOMContentLoaded", (e) => {
     },
     false
   );
-  const fragment = document.createDocumentFragment();
+
+  sorterAlf.addEventListener("click", (e) => {
+    sorter(1);
+  });
+ 
+  sorterPrice.addEventListener("click", (e) => {
+    sorter(2);
+  });
+  
+  sorterDesc.addEventListener('change', function() {
+    if (this.checked) {
+        sorter(3);
+    } else {
+     fetchData();
+    }
+  });
   
   const fetchData = async () => {
     const product = await fetch("http://127.0.0.1:8000/api/products");
@@ -55,7 +80,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const listProducts = (data) => {
     data.forEach((item) => {
       productCard.querySelector("h5").textContent = item.name;
-      productCard.querySelector("p").textContent = "$" + item.price;
+      productCard.querySelector("p").textContent = "Precio $" + item.price;
+      productCard.querySelector("label").textContent = "Descuento $" + item.discount;
       const image = productCard.querySelector("img");
       image.src = item.url_image;
       image.alt = item.name;
@@ -96,6 +122,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
           })
     );
   };
+
   const filterCategory = (event) => {
     if (event.target.value == "All") {
       fetchData();
@@ -110,5 +137,18 @@ document.addEventListener("DOMContentLoaded", (e) => {
             })
       );
     }
+  };
+  
+  const sorter = (option) => {
+   
+      fetch(`http://127.0.0.1:8000/api/sorter_product/${option}`).then(
+        (response) =>
+          response
+            .json()
+            .then((data) => ({ data }))
+            .then((productData) => {
+              listProducts(productData.data);
+            })
+      );
   };
   
