@@ -28,7 +28,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css"
       rel="stylesheet"
     />
-    
+
     <title>BSale Ecommerce</title>
   </head>
   <body>
@@ -58,65 +58,90 @@
                 </div>
               </div>
 
-             
-                  <div class="col-3">
-                    <select class="form-select" aria-label="Categoria" id="category">
-                                       
-                    </select>
-                    
-                  </div>
-                  <div class="col-3 mt-2">
-                    <button type="button" class="btn btn-info btn-rounded" id="filter-alfabetico">
-                      A-Z <i class="fa fa-caret-down"></i>
-                    </button>
-                  </div>
-                  <div class="col-3 mt-2">
-                    <button type="button" class="btn btn-secondary btn-rounded" id="filter-precio">
-                      Price <i class="fa fa-caret-down"></i>
-                    </button>
-                  </div>
+              <div class="col-3">
+                <select
+                  class="form-select"
+                  aria-label="Categoria"
+                  id="category"
+                ></select>
+              </div>
+              <div class="col-3 mt-2">
+                <button
+                  type="button"
+                  class="btn btn-info btn-rounded"
+                  id="filter-alfabetico"
+                >
+                  A-Z <i class="fa fa-caret-down"></i>
+                </button>
+              </div>
+              <div class="col-3 mt-2">
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-rounded"
+                  id="filter-precio"
+                >
+                  Price <i class="fa fa-caret-down"></i>
+                </button>
+              </div>
 
-                  <div class="col-3 mt-2">
-                    <div class="form-check form-switch">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        role="switch"
-                        id="filter-descuento"
-                      />
-                      <label
-                        class="form-check-label"
-                        for="flexSwitchCheckChecked"
-                        >Descuento</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col-3 mt-2">
-                    <button type="button" class="btn btn-success btn-rounded">
-                      Limpiar filtros
-                    </button>
-                  </div>
-                
+              <div class="col-3 mt-2">
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="filter-descuento"
+                  />
+                  <label class="form-check-label" for="flexSwitchCheckChecked"
+                    >Descuento</label
+                  >
+                </div>
+              </div>
+              <div class="col-3 mt-2">
+                <button type="button" class="btn btn-success btn-rounded">
+                  Limpiar filtros
+                </button>
+              </div>
+
               <div class="col-12 mt-4">
-                <div class="row" id="products">
+                <div class="row text-center" id="products">
                   <template id="product-card">
                     <div class="col-4 mb-2">
                       <div class="card">
-                        <div class="bg-image hover-overlay ripple text-center mt-2" data-mdb-ripple-color="light">
-                            <img src="" class="img-fluid" style="height:100px ;"/>
-                           
-                          </div>
-                       
+                        <div
+                          class="bg-image hover-overlay ripple text-center mt-2"
+                          data-mdb-ripple-color="light"
+                        >
+                          <img src="" class="img-fluid" style="height: 100px" />
+                        </div>
+
                         <div class="card-body">
                           <h5>Titulo</h5>
                           <p>$precio</p>
-                          <label>discount</label>
-                          <button class="btn btn-dark">Comprar</button>
+                          <label>discount</label> <br />
+                          <button
+                            type="button"
+                            class="btn btn-warning btn-rounded"
+                            id="comprar"
+                          >
+                            Comprar
+                          </button>
                         </div>
                       </div>
                     </div>
                   </template>
                 </div>
+              </div>
+              <div class="col-12 mt-2 d-flex justify-content-between">
+                <button id="btn_prev" type="button" class="btn btn-outline-dark  btn-rounded" data-mdb-ripple-color="dark" onclick="javascript:prevPage()">
+                    <i class="fa fa-chevron-left"></i> Prev
+                  </button>
+                <!-- <a href="javascript:prevPage()" id="btn_prev">Prev</a> -->
+                 <span id="page"></span> de <span id="pages"></span>
+                 <button id="btn_next" type="button" class="btn btn-outline-dark  btn-rounded" data-mdb-ripple-color="dark" onclick="javascript:nextPage()">
+                    Next <i class="fa fa-chevron-right"></i> 
+                  </button>
+                <!-- <a href="javascript:nextPage()" id="btn_next">Next</a> -->
               </div>
             </div>
           </div>
