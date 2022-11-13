@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", (e) => {
-  fetchData(null, null, false, false, false);
+  fetchData();
   fetchCategory();
 });
 
@@ -22,6 +22,13 @@ let car_products = {};
 var current_page = 1;
 var records_per_page = 5;
 var num_pages = 0;
+
+var filterName = null;
+var filterCat = null;
+var filterAlph = false;
+var filterPrice = false;
+var filterDesc = false;
+
 let dropdown = document.getElementById("category");
 dropdown.length = 0;
 
@@ -41,8 +48,10 @@ searchInput.addEventListener("keypress", function (event) {
     search();
   }
 });
+
 searchInput.addEventListener("input", (e) => {
   if (searchInput.value == "") {
+    filterName=searchInput.value;
     fetchData();
   }
 });
@@ -56,22 +65,39 @@ dropdown.addEventListener(
 );
 
 sorterAlf.addEventListener("click", (e) => {
-  sorter(1);
+  filterAlph = !filterAlph;
+  if(filterAlph){
+    sorterAlf.innerHTML = `
+    A-Z <i class="fa fa-caret-up"></i>
+        `;
+  }else{
+    sorterAlf.innerHTML = `
+    A-Z <i class="fa fa-caret-down"></i>
+        `;
+  }
+  fetchData();
 });
 
 sorterPrice.addEventListener("click", (e) => {
-  sorter(2);
+  filterPrice = !filterPrice;
+  if(filterPrice){
+    sorterPrice.innerHTML = `
+    Price <i class="fa fa-caret-up"></i>
+        `;
+  }else{
+    sorterPrice.innerHTML = `
+    Price <i class="fa fa-caret-down"></i>
+        `;
+  }
+  fetchData();
 });
 cleanFilters.addEventListener("click", (e) => {
   limpiarFiltros();
 });
 
 sorterDesc.addEventListener("change", function () {
-  if (this.checked) {
-    sorter(3);
-  } else {
-    fetchData();
-  }
+  filterDesc = !filterDesc;
+  fetchData();
 });
 
 products.addEventListener("click", (e) => {
@@ -82,15 +108,15 @@ carProducts.addEventListener("click", (e) => {
   modificarProducts(e);
 });
 
-const fetchData = async (nombre, categoria, alfabetico, precio, descuento) => {
-    data={
-        name:nombre,
-        category:categoria,
-        alphabetic:alfabetico,
-        price:precio,
-        discount:descuento,
-    }
-    
+const fetchData = async () => {
+  data = {
+    name: filterName,
+    category: filterCat,
+    alphabetic: filterAlph,
+    price: filterPrice,
+    discount: filterDesc,
+  };
+
   fetch("http://127.0.0.1:8000/api/products", {
     method: "POST", // or 'PUT'
     headers: {
@@ -100,17 +126,17 @@ const fetchData = async (nombre, categoria, alfabetico, precio, descuento) => {
   })
     .then((response) => response.json())
     .then((data) => {
-        data = { ...data };
-        changePage(1);
+      data = { ...data };
+      changePage(current_page);
     })
     .catch((error) => {
       console.error("Error:", error);
     });
 
-//   const product = await fetch("http://127.0.0.1:8000/api/products");
-//   const res = await product.json();
-//   data = { ...res };
-//   changePage(1);
+  //   const product = await fetch("http://127.0.0.1:8000/api/products");
+  //   const res = await product.json();
+  //   data = { ...res };
+  //   changePage(1);
 };
 const fetchCategory = async () => {
   const categories = await fetch("http://127.0.0.1:8000/api/categories");
@@ -148,53 +174,35 @@ const listCategories = (data) => {
 };
 
 const search = () => {
-  const inputValue = searchInput.value;
+   filterName = searchInput.value;
+   fetchData();
+//   if (inputValue == "") {
+//     fetchData();
+//   }
 
-  if (inputValue == "") {
-    fetchData();
-  }
-
-  fetch(`http://127.0.0.1:8000/api/search_product/${inputValue}`).then(
-    (response) =>
-      response
-        .json()
-        .then((data) => ({ data }))
-        .then((productData) => {
-          data = { ...productData.data };
-          changePage(current_page);
-        })
-  );
+//   fetch(`http://127.0.0.1:8000/api/search_product/${inputValue}`).then(
+//     (response) =>
+//       response
+//         .json()
+//         .then((data) => ({ data }))
+//         .then((productData) => {
+//           data = { ...productData.data };
+//           changePage(current_page);
+//         })
+//   );
 };
 
 const filterCategory = (event) => {
   if (event.target.value == "All") {
-    fetchData();
+    filterCat = null;
   } else {
-    fetch(
-      `http://127.0.0.1:8000/api/produts_by_category/${event.target.value}`
-    ).then((response) =>
-      response
-        .json()
-        .then((data) => ({ data }))
-        .then((productData) => {
-          data = { ...productData.data };
-          changePage(current_page);
-        })
-    );
+   
+    filterCat = event.target.value;
   }
+  fetchData();
 };
 
-const sorter = (option) => {
-  fetch(`http://127.0.0.1:8000/api/sorter_product/${option}`).then((response) =>
-    response
-      .json()
-      .then((data) => ({ data }))
-      .then((productData) => {
-        data = { ...productData.data };
-        changePage(current_page);
-      })
-  );
-};
+
 
 function prevPage() {
   if (current_page > 1) {
@@ -259,7 +267,6 @@ const addProduct = (e) => {
       id: prod.querySelector("button").dataset.id,
       cantidad: 1,
     };
-    // console.log(producto)
     if (car_products.hasOwnProperty(producto.id)) {
       producto.cantidad = car_products[producto.id].cantidad + 1;
     }
@@ -281,7 +288,6 @@ const showProducts = () => {
     templateCarPrd.querySelectorAll("td")[2].textContent =
       producto.precio * producto.cantidad;
 
-    //botones
     templateCarPrd.querySelector(".btn-success").dataset.id = producto.id;
     templateCarPrd.querySelector(".btn-danger").dataset.id = producto.id;
     templateCarPrd.querySelector(".btn-outline-danger").dataset.id =
@@ -357,5 +363,12 @@ const modificarProducts = (e) => {
 
 function limpiarFiltros() {
   sorterDesc.checked = false;
+  searchInput.value="";
+  filterCat=null,
+  filterAlph=false;
+  filterCat=false;
+  filterPrice=false;
+  filterName=null,
+
   fetchData();
 }
