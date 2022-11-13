@@ -93,7 +93,7 @@ carProducts.addEventListener("click", (e) => {
 });
 
 const fetchData = async () => {
-  data = {
+  variables = {
     name: filterName,
     category: filterCat,
     alphabetic: filterAlph,
@@ -106,11 +106,11 @@ const fetchData = async () => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(variables),
   })
     .then((response) => response.json())
-    .then((data) => {
-      data = { ...data };
+    .then((prod) => {
+      data = { ...prod };
       changePage(current_page);
     })
     .catch((error) => {
@@ -204,6 +204,7 @@ function nextPage() {
 }
 
 function changePage(page) {
+  console.log("data en current", Object.values(data).length);
   var next = document.getElementById("btn_next");
   var prev = document.getElementById("btn_prev");
   var actual_page = document.getElementById("page");
@@ -212,29 +213,35 @@ function changePage(page) {
   if (page < 1) page = 1;
   if (page > numPages()) page = numPages();
   let new_data = [];
-
-  for (
-    var i = (page - 1) * records_per_page;
-    i < page * records_per_page && i < Object.values(data).length;
-    i++
-  ) {
-    new_data.push(data[i]);
-  }
-  listProducts(new_data);
-
-  actual_page.innerHTML = page;
-  pages.innerHTML = num_pages;
-
-  if (page == 1) {
-    prev.style.visibility = "hidden";
+  if (Object.values(data).length == 0) {
+    products.innerHTML = `
+    <label class="mt-5 mb-5" ><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No hay conincidencias para esta busqueda</label>
+    
+    `;
   } else {
-    prev.style.visibility = "visible";
-  }
+    for (
+      var i = (page - 1) * records_per_page;
+      i < page * records_per_page && i < Object.values(data).length;
+      i++
+    ) {
+      new_data.push(data[i]);
+    }
+    listProducts(new_data);
 
-  if (page == numPages()) {
-    next.style.visibility = "hidden";
-  } else {
-    next.style.visibility = "visible";
+    actual_page.innerHTML = page;
+    pages.innerHTML = num_pages;
+
+    if (page == 1) {
+      prev.style.visibility = "hidden";
+    } else {
+      prev.style.visibility = "visible";
+    }
+
+    if (page == numPages()) {
+      next.style.visibility = "hidden";
+    } else {
+      next.style.visibility = "visible";
+    }
   }
 }
 
@@ -351,8 +358,9 @@ function limpiarFiltros() {
   searchInput.value = "";
   categories.value = "All";
 
-  (filterCat = null), (filterAlph = false);
-  filterCat = false;
+  (filterCat = null), 
+  (filterAlph = false);
+  filterCat = null;
   filterPrice = false;
   filterName = null;
 
