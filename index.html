@@ -98,7 +98,7 @@
                 </div>
               </div>
               <div class="col-4 mt-2">
-                <button type="button" class="btn btn-success btn-rounded">
+                <button type="button" class="btn btn-success btn-rounded" id="limpiar">
                   Limpiar filtros
                 </button>
               </div>
@@ -176,26 +176,29 @@
                         <td scope="row">producto</td>
                         <td scope="row">cant</td>
                         <td scope="row">$precio</td>
-                        <td rowspan="3" class="d-flex justify-content-between">
-                          <button
-                            class="btn btn-success btn-floating"
-                            id="aumentar"
-                          >
-                            +
-                          </button>
-                          <button
-                            class="btn btn-danger btn-floating"
-                            id="disminuir"
-                          >
-                            -
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-outline-danger btn-rounded"
-                            id="borrar"
-                          >
-                            Borrar
-                          </button>
+                        <td scope="row">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <button
+                                class="btn btn-success btn-floating"
+                                id="aumentar"
+                              >
+                                +
+                              </button>
+                              <button
+                                class="btn btn-danger btn-floating"
+                                id="disminuir"
+                              >
+                                -
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-outline-danger btn-floating"
+                                id="borrar"
+                              >
+                                B
+                              </button>                              
+                              </div>
+                         
                         </td>
                       </tr>
                     </template>
@@ -232,6 +235,7 @@
                           class="btn btn-primary btn-sm"
                           style="width: 100%"
                           id="pagar"
+                         
                         >
                           Pagar
                         </button>
@@ -240,6 +244,7 @@
                   </div>
                 </template>
               </div>
+            
             </div>
           </div>
         </div>

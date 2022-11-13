@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", (e) => {
-  fetchData();
+  fetchData(null, null, false, false, false);
   fetchCategory();
 });
 
@@ -15,6 +15,7 @@ const searchInput = document.getElementById("search-input");
 const sorterAlf = document.getElementById("filter-alfabetico");
 const sorterPrice = document.getElementById("filter-precio");
 const sorterDesc = document.getElementById("filter-descuento");
+const cleanFilters = document.getElementById("limpiar");
 const fragment = document.createDocumentFragment();
 let data = {};
 let car_products = {};
@@ -61,6 +62,9 @@ sorterAlf.addEventListener("click", (e) => {
 sorterPrice.addEventListener("click", (e) => {
   sorter(2);
 });
+cleanFilters.addEventListener("click", (e) => {
+  limpiarFiltros();
+});
 
 sorterDesc.addEventListener("change", function () {
   if (this.checked) {
@@ -78,11 +82,35 @@ carProducts.addEventListener("click", (e) => {
   modificarProducts(e);
 });
 
-const fetchData = async () => {
-  const product = await fetch("http://127.0.0.1:8000/api/products");
-  const res = await product.json();
-  data = { ...res };
-  changePage(1);
+const fetchData = async (nombre, categoria, alfabetico, precio, descuento) => {
+    data={
+        name:nombre,
+        category:categoria,
+        alphabetic:alfabetico,
+        price:precio,
+        discount:descuento,
+    }
+    
+  fetch("http://127.0.0.1:8000/api/products", {
+    method: "POST", // or 'PUT'
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+        data = { ...data };
+        changePage(1);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
+//   const product = await fetch("http://127.0.0.1:8000/api/products");
+//   const res = await product.json();
+//   data = { ...res };
+//   changePage(1);
 };
 const fetchCategory = async () => {
   const categories = await fetch("http://127.0.0.1:8000/api/categories");
@@ -292,11 +320,12 @@ const showOrder = () => {
 
   footer.appendChild(fragment);
 
-  const boton = document.querySelector('#pagar')
-    boton.addEventListener('click', () => {
-        carrito = {}
-        showProducts()
-    })
+  const boton = document.querySelector("#pagar");
+  boton.addEventListener("click", () => {
+    car_products = {};
+    showProducts();
+    alert("Gracias por su compra, total: $" + nPrecio);
+  });
 };
 
 const modificarProducts = (e) => {
@@ -326,3 +355,7 @@ const modificarProducts = (e) => {
   e.stopPropagation();
 };
 
+function limpiarFiltros() {
+  sorterDesc.checked = false;
+  fetchData();
+}
