@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   fetchCategory();
 });
 
+// Seccion de variables
 const productCard = document.getElementById("product-card").content;
 const products = document.getElementById("products");
 const carProducts = document.getElementById("car-products");
@@ -39,6 +40,7 @@ defaultOption.value = "All";
 dropdown.add(defaultOption);
 dropdown.selectedIndex = 0;
 
+// Seccion de listeners
 searchButton.addEventListener("click", (e) => {
   search();
 });
@@ -92,6 +94,7 @@ carProducts.addEventListener("click", (e) => {
   modificarProducts(e);
 });
 
+// Seccion de funciones
 const fetchData = async () => {
   variables = {
     name: filterName,
@@ -204,7 +207,6 @@ function nextPage() {
 }
 
 function changePage(page) {
-  console.log("data en current", Object.values(data).length);
   var next = document.getElementById("btn_next");
   var prev = document.getElementById("btn_prev");
   var actual_page = document.getElementById("page");
@@ -213,6 +215,7 @@ function changePage(page) {
   if (page < 1) page = 1;
   if (page > numPages()) page = numPages();
   let new_data = [];
+  
   if (Object.values(data).length == 0) {
     products.innerHTML = `
     <label class="mt-5 mb-5" ><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No hay conincidencias para esta busqueda</label>
