@@ -1,3 +1,12 @@
+## Especificaciones:
+## Lenguaje Vanilla JS.
+## Para revisar el proyecto en local, es necesario unicamente abrir el archivo de index.html
+
+## Estructura:
+## La seccion de funciones y logica del proyecto se encuentra en app.js
+## La seccion del front se encuentra en index.html
+
+## Objetivo: Simular un carrito de compras, permitiendo al usuario ver los productos existentes en la plataforma, filtrarlos mediante categoria, nombre, precio, descuento o alfabeticamente, tambien seccionarlos mediante la paginacion, asi como simular la compra de uno o varios productos, agregando as un carrito donde el usuario puede modificar de manera individual cada producto, añadir mas cantidad, restar o bien eliminar el producto, asi como continuar a la compra final, lo cual permita vaciar el carrito por completo.
 
 ## Function numPages:
 

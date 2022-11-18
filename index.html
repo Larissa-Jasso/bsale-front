@@ -32,134 +32,150 @@
     <title>BSale Ecommerce</title>
   </head>
   <body>
-    <body>
-      <div class="container mt-3">
-        <div class="row text-center mb-3">
-          <div class="col">
-            <h4>Bsale Carrito de compras</h4>
-          </div>
+    <!-- Inicio del container -->
+    <div class="container mt-3">
+      <div class="row text-center mb-3">
+        <div class="col">
+          <h4>Bsale Carrito de compras</h4>
         </div>
-        <div class="row gy-4 gx-5 ">
-          <div class="col-xs-12 col-lg-6">
-            <div class="row gy-2">
-              <div class="col-xs-12 col-md-8">
-                <div class="input-group rounded">
-                  <input
-                    type="search"
-                    class="form-control rounded"
-                    placeholder="Buscar producto por nombre"
-                    aria-label="Search"
-                    aria-describedby="search-addon"
-                    id="search-input"
-                  />
-                  <span class="input-group-text border-0" id="search-addon">
-                    <i class="fa fa-search" id="search-button"></i>
-                  </span>
-                </div>
-              </div>
-
-              <div class="col-xs-12 col-md-4">
-                <select
-                  class="form-select"
-                  aria-label="Categoria"
-                  id="category"
-                ></select>
-              </div>
-              <div class="col-xs-6 col-md-3">
-                <button
-                  type="button"
-                  class="btn btn-info btn-rounded"
-                  id="filter-alfabetico"
-                >
-                  A-Z <i class="fa fa-caret-down"></i>
-                </button>
-              </div>
-              <div class="col-xs-6 col-md-3 col-lg-4">
-                <button
-                  type="button"
-                  class="btn btn-secondary btn-rounded"
-                  id="filter-precio"
-                >
-                  Price <i class="fa fa-caret-down"></i>
-                </button>
-              </div>
-
-              <div class="col-xs-12 col-md-3 col-lg-4">
-                <div class="form-check form-switch">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    id="filter-descuento"
-                  />
-                  <label class="form-check-label" for="flexSwitchCheckChecked"
-                    >Descuento</label
-                  >
-                </div>
-              </div>
-              <div class="col-xs-12 col-md-3 col-lg-12 col-xl-4">
-                <button type="button" class="btn btn-success btn-rounded" id="limpiar">
-                  Limpiar filtros
-                </button>
-              </div>
-
-              <div class="col-12 mt-4">
-                <div class="row text-center gy-2" id="products">
-                  <template id="product-card">
-                    <div class="col-xs-12 col-md-4 col-lg-6 col-xl-4">
-                      <div class="card">
-                        <div
-                          class="bg-image hover-overlay ripple text-center mt-2"
-                          data-mdb-ripple-color="light"
-                        >
-                          <img src="" class="img-fluid" style="height: 100px" />
-                        </div>
-
-                        <div class="card-body">
-                          <h5>Titulo</h5>
-                          <p>$precio</p>
-                          <label>discount</label> <br />
-                          <button
-                            type="button"
-                            class="btn btn-warning btn-rounded"
-                            id="comprar"
-                          >
-                            Comprar
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </template>
-                </div>
-              </div>
-              <div class="col-12 d-flex justify-content-between">
-                <button
-                  id="btn_prev"
-                  type="button"
-                  class="btn btn-outline-dark btn-rounded"
-                  data-mdb-ripple-color="dark"
-                  onclick="javascript:prevPage()"
-                >
-                  <i class="fa fa-chevron-left"></i> Prev
-                </button>
-                <span id="page"></span> de <span id="pages"></span>
-                <button
-                  id="btn_next"
-                  type="button"
-                  class="btn btn-outline-dark btn-rounded"
-                  data-mdb-ripple-color="dark"
-                  onclick="javascript:nextPage()"
-                >
-                  Next <i class="fa fa-chevron-right"></i>
-                </button>
+      </div>
+      <!-- Inicio del row principal, divide la seccion de productos con tabla de carrito -->
+      <div class="row gy-4 gx-5">
+        <!-- Inicio de la seccion de productos y filtros -->
+        <div class="col-xs-12 col-lg-6">
+          <div class="row gy-2">
+            <!-- Componente de busqueda por nombre -->
+            <div class="col-xs-12 col-md-8">
+              <div class="input-group rounded">
+                <input
+                  type="search"
+                  class="form-control rounded"
+                  placeholder="Buscar producto por nombre"
+                  aria-label="Search"
+                  aria-describedby="search-addon"
+                  id="search-input"
+                />
+                <span class="input-group-text border-0" id="search-addon">
+                  <i class="fa fa-search" id="search-button"></i>
+                </span>
               </div>
             </div>
-          </div>
-          <div class="col-xs-12 col-lg-6">
-            <div class="row gy-2">
-              <div class="col-12">
-                <div class="table-responsive">
+<!-- Componente de busqueda por categoria -->
+            <div class="col-xs-12 col-md-4">
+              <select
+                class="form-select"
+                aria-label="Categoria"
+                id="category"
+              ></select>
+            </div>
+            <!-- Componente de sorter alfabetico -->
+            <div class="col-xs-6 col-md-3">
+              <button
+                type="button"
+                class="btn btn-info btn-rounded"
+                id="filter-alfabetico"
+              >
+                A-Z <i class="fa fa-caret-down"></i>
+              </button>
+            </div>
+            <!-- Componente de sorter por precio -->
+            <div class="col-xs-6 col-md-3 col-lg-4">
+              <button
+                type="button"
+                class="btn btn-secondary btn-rounded"
+                id="filter-precio"
+              >
+                Price <i class="fa fa-caret-down"></i>
+              </button>
+            </div>
+<!-- Componente de filtro por descuento -->
+            <div class="col-xs-12 col-md-3 col-lg-4">
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="filter-descuento"
+                />
+                <label class="form-check-label" for="flexSwitchCheckChecked"
+                  >Descuento</label
+                >
+              </div>
+            </div>
+            <!-- Componente para limpiar filtros y mostrar los productos originales -->
+            <div class="col-xs-12 col-md-3 col-lg-12 col-xl-4">
+              <button
+                type="button"
+                class="btn btn-success btn-rounded"
+                id="limpiar"
+              >
+                Limpiar filtros
+              </button>
+            </div>
+<!-- Seccion para mostrar los cards de los productos -->
+            <div class="col-12 mt-4">
+              <div class="row text-center gy-2" id="products">
+                <!-- Template que permite crear la estructura del card para el producto -->
+                <template id="product-card">
+                  <div class="col-xs-12 col-md-4 col-lg-6 col-xl-4">
+                    <div class="card">
+                      <div
+                        class="bg-image hover-overlay ripple text-center mt-2"
+                        data-mdb-ripple-color="light"
+                      >
+                        <img src="" class="img-fluid" style="height: 100px" />
+                      </div>
 
+                      <div class="card-body">
+                        <h5>Titulo</h5>
+                        <p>$precio</p>
+                        <label>discount</label> <br />
+                        <button
+                          type="button"
+                          class="btn btn-warning btn-rounded"
+                          id="comprar"
+                        >
+                          Comprar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+            <!-- Inicio de Seccion de paginacion -->
+            <div class="col-12 d-flex justify-content-between">
+              <button
+                id="btn_prev"
+                type="button"
+                class="btn btn-outline-dark btn-rounded"
+                data-mdb-ripple-color="dark"
+                onclick="javascript:prevPage()"
+              >
+                <i class="fa fa-chevron-left"></i> Prev
+              </button>
+              <span id="page"></span> de <span id="pages"></span>
+              <button
+                id="btn_next"
+                type="button"
+                class="btn btn-outline-dark btn-rounded"
+                data-mdb-ripple-color="dark"
+                onclick="javascript:nextPage()"
+              >
+                Next <i class="fa fa-chevron-right"></i>
+              </button>
+            </div>
+            <!-- Fin de Seccion de paginacion -->
+
+          </div>
+        </div>
+        <!-- Fin de la seccion de productos y filtros -->
+        <!-- Inicio de la seccion de carrito de compras -->
+        <div class="col-xs-12 col-lg-6">
+          <div class="row gy-2">
+            <div class="col-12">
+              <!-- Tabla que permite mostrar los productos añadidos al carrito -->
+              <div class="table-responsive">
                 <table class="table table-striped table-hover">
                   <thead>
                     <tr>
@@ -170,7 +186,7 @@
                       <th scope="col">Opciones</th>
                     </tr>
                   </thead>
-                 
+
                   <tbody id="car-products">
                     <template id="template-car-products">
                       <tr>
@@ -179,81 +195,83 @@
                         <td scope="row">cant</td>
                         <td scope="row">$precio</td>
                         <td scope="row">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <button
-                                class="btn btn-success btn-floating"
-                                id="aumentar"
-                              >
-                                +
-                              </button>
-                              <button
-                                class="btn btn-danger btn-floating"
-                                id="disminuir"
-                              >
-                                -
-                              </button>
-                              <button
-                                type="button"
-                                class="btn btn-outline-danger btn-floating"
-                                id="borrar"
-                              >
-                                B
-                              </button>                              
-                              </div>
-                         
+                          <!-- Seccion de acciones que se puede realizar en cada producto -->
+                          <div
+                            class="d-flex align-items-center justify-content-between"
+                          >
+                            <button
+                              class="btn btn-success btn-floating"
+                              id="aumentar"
+                            >
+                              +
+                            </button>
+                            <button
+                              class="btn btn-danger btn-floating"
+                              id="disminuir"
+                            >
+                              -
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-outline-danger btn-floating"
+                              id="borrar"
+                            >
+                              B
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     </template>
                   </tbody>
-                  
                 </table>
               </div>
-
-              </div>
-              <div class="col-xs-12 col-md-8 offset-md-3 offset-lg-2 offset-xl-3" id="footer">
-                <label>Aun no hay productos añadidos</label>
-                <template id="orden">
-                  <div
-                    class="card"
-                    style="width: 18rem; align-content: flex-end"
-                  >
-                    <div class="card-header text-center">
-                      <b>Orden de compra</b>
+            </div>
+            <div
+              class="col-xs-12 col-md-8 offset-md-3 offset-lg-2 offset-xl-3"
+              id="footer"
+            >
+              <label>Aun no hay productos añadidos</label>
+              <!-- Template que permite ver la informacion general del carrito, como precio total y cantidad total -->
+              <template id="orden">
+                <div class="card" style="width: 18rem; align-content: flex-end">
+                  <div class="card-header text-center">
+                    <b>Orden de compra</b>
+                  </div>
+                  <div class="row m-1">
+                    <div class="col-8">
+                      <label for="">Total de productos: </label>
                     </div>
-                    <div class="row m-1">
-                      <div class="col-8">
-                        <label for="">Total de productos: </label>
-                      </div>
-                      <div class="col-4">
-                        <label for="">cant </label>
+                    <div class="col-4">
+                      <label for="">cant </label>
                     </div>
-                      <div class="col-8">
-                        <label for="">Total a pagar: </label>
-                      </div>
-                      <div class="col-4">
-                        <label for="">$</label>
+                    <div class="col-8">
+                      <label for="">Total a pagar: </label>
                     </div>
-                      <div class="col-12 mt-2">
-                        <button
-                          type="button"
-                          class="btn btn-primary btn-sm"
-                          style="width: 100%"
-                          id="pagar"
-                         
-                        >
-                          Pagar
-                        </button>
-                      </div>
+                    <div class="col-4">
+                      <label for="">$</label>
+                    </div>
+                    <div class="col-12 mt-2">
+                      <button
+                        type="button"
+                        class="btn btn-primary btn-sm"
+                        style="width: 100%"
+                        id="pagar"
+                      >
+                        Pagar
+                      </button>
                     </div>
                   </div>
-                </template>
-              </div>
-            
+                </div>
+              </template>
             </div>
           </div>
         </div>
+        <!-- Fin de la seccion de carrito de compras -->
+
       </div>
-    </body>
+      <!-- Fin del row principal, divide la seccion de productos con tabla de carrito -->
+    </div>
+    <!-- Fin del container -->
   </body>
 </html>
 
