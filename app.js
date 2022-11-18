@@ -104,7 +104,7 @@ const fetchData = async () => {
     discount: filterDesc,
   };
 
-  fetch("http://127.0.0.1:8000/api/products", {
+  fetch("http://larissajasso.herokuapp.com/public/api/products", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -121,7 +121,7 @@ const fetchData = async () => {
     });
 };
 const fetchCategory = async () => {
-  const categories = await fetch("http://127.0.0.1:8000/api/categories");
+  const categories = await fetch("http://larissajasso.herokuapp.com/public/api/categories");
   const cat = await categories.json();
   listCategories(cat);
 };

@@ -39,10 +39,10 @@
             <h4>Bsale Carrito de compras</h4>
           </div>
         </div>
-        <div class="row">
+        <div class="row gy-4 gx-5 ">
           <div class="col-xs-12 col-lg-6">
-            <div class="row">
-              <div class="col-8">
+            <div class="row gy-2">
+              <div class="col-xs-12 col-md-8">
                 <div class="input-group rounded">
                   <input
                     type="search"
@@ -58,14 +58,14 @@
                 </div>
               </div>
 
-              <div class="col-4">
+              <div class="col-xs-12 col-md-4">
                 <select
                   class="form-select"
                   aria-label="Categoria"
                   id="category"
                 ></select>
               </div>
-              <div class="col-3 mt-2">
+              <div class="col-xs-6 col-md-3">
                 <button
                   type="button"
                   class="btn btn-info btn-rounded"
@@ -74,7 +74,7 @@
                   A-Z <i class="fa fa-caret-down"></i>
                 </button>
               </div>
-              <div class="col-4 mt-2">
+              <div class="col-xs-6 col-md-3 col-lg-4">
                 <button
                   type="button"
                   class="btn btn-secondary btn-rounded"
@@ -84,7 +84,7 @@
                 </button>
               </div>
 
-              <div class="col-4 mt-2">
+              <div class="col-xs-12 col-md-3 col-lg-4">
                 <div class="form-check form-switch">
                   <input
                     class="form-check-input"
@@ -97,16 +97,16 @@
                   >
                 </div>
               </div>
-              <div class="col-4 mt-2">
+              <div class="col-xs-12 col-md-3 col-lg-12 col-xl-4">
                 <button type="button" class="btn btn-success btn-rounded" id="limpiar">
                   Limpiar filtros
                 </button>
               </div>
 
               <div class="col-12 mt-4">
-                <div class="row text-center" id="products">
+                <div class="row text-center gy-2" id="products">
                   <template id="product-card">
-                    <div class="col-4 mb-2">
+                    <div class="col-xs-12 col-md-4 col-lg-6 col-xl-4">
                       <div class="card">
                         <div
                           class="bg-image hover-overlay ripple text-center mt-2"
@@ -132,7 +132,7 @@
                   </template>
                 </div>
               </div>
-              <div class="col-12 mt-2 d-flex justify-content-between">
+              <div class="col-12 d-flex justify-content-between">
                 <button
                   id="btn_prev"
                   type="button"
@@ -156,8 +156,10 @@
             </div>
           </div>
           <div class="col-xs-12 col-lg-6">
-            <div class="row">
+            <div class="row gy-2">
               <div class="col-12">
+                <div class="table-responsive">
+
                 <table class="table table-striped table-hover">
                   <thead>
                     <tr>
@@ -206,7 +208,9 @@
                   
                 </table>
               </div>
-              <div class="col-8 offset-lg-2 offset-xl-3" id="footer">
+
+              </div>
+              <div class="col-xs-12 col-md-8 offset-md-3 offset-lg-2 offset-xl-3" id="footer">
                 <label>Aun no hay productos añadidos</label>
                 <template id="orden">
                   <div
