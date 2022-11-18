@@ -301,7 +301,7 @@ const showOrder = () => {
   footer.innerHTML = "";
   if (Object.keys(car_products).length === 0) {
     footer.innerHTML = `
-        <label>No hay productos añadidos</label>
+        <label>No hay productos agregados</label>
         `;
     return;
   }
